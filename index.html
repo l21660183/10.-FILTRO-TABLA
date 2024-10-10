@@ -1,0 +1,87 @@
+<!-- ANGIE XIMENA 0LVERA ALVAREZ-->
+<!--ACTIVIDAD 10 FILTRO DE BUSQUEDA DE UNA TABLA-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtro de Tabla en Tiempo Real</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #000000;
+        }
+        th {
+            background-color: #50aebb;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Filtro de Tabla</h2>
+    <input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Buscar en la tabla...">
+    
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>País</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Juan Pérez</td>
+                <td>30</td>
+                <td>México</td>
+            </tr>
+            <tr>
+                <td>Ana García</td>
+                <td>25</td>
+                <td>Argentina</td>
+            </tr>
+            <tr>
+                <td>Pedro Sánchez</td>
+                <td>40</td>
+                <td>España</td>
+            </tr>
+            <tr>
+                <td>Sofía López</td>
+                <td>28</td>
+                <td>Colombia</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function filtrarTabla() {
+            // Obtener el valor del input
+            let input = document.getElementById("filtro");
+            let filtro = input.value.toLowerCase();
+            // Obtener la tabla y todas las filas
+            let tabla = document.getElementById("miTabla");
+            let filas = tabla.getElementsByTagName("tr");
+            // Iterar sobre todas las filas del cuerpo de la tabla
+            for (let i = 1; i < filas.length; i++) {
+                let fila = filas[i];
+                let celdas = fila.getElementsByTagName("td");
+                let coincide = false;
+                // Verificar si alguna celda en la fila contiene el texto buscado
+                for (let j = 0; j < celdas.length; j++) {
+                    if (celdas[j].innerHTML.toLowerCase().indexOf(filtro) > -1) {
+                        coincide = true;
+                        break;
+                    }
+                }
+                // Mostrar u ocultar la fila según si coincide
+                fila.style.display = coincide ? "" : "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
